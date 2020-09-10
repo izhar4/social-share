@@ -25,31 +25,36 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   nonSPArouter.get('/', (req, res, next) => {
-    console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', share)
+    // console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', share)
     // fs.readFile(share, 'utf8', (err, text) => {
     //   res.send(text);
     // });
-    res.render('share');
-//     res.send(`
-//     <!doctype html>
-// <html lang="en">
+    // res.render('share');
+    res.send(`
+    <!doctype html>
+<html lang="en">
 
-// <head>
-//     <title>Share html Ref</title>
-//   <meta charset="utf-8">
+<head>
+    <title>Share html Ref</title>
+  <meta charset="utf-8">
 
-//   <meta property="fb:app_id" content="850496558621957" />
-//   <meta property="og:url" content="https://mixpanel.com/" />
-//   <meta property="og:title" content="Hacker News Share" />
-//   <meta property="og:description" content="Hacker News Desc Share" />
-// </head>
-// <body>
-//     Hello
-//   </body>
-// </html>
+  <meta property="og:locale" content="en_US" />
+
+  <meta property="og:url" content="https://social-share-angular.herokuapp.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hacker News share sjhare hsre" />
+  <meta property="og:image" content="https://eventbox-prod.s3.amazonaws.com/profile/80245241589900869247.jpg" />
+  <meta property="og:image:width" content="1279" />
+  <meta property="og:image:height" content="853" />
+  <meta property="og:description" content="Hacker News Desc share desc ssjsjsjsjm" />
+</head>
+<body>
+    Hello
+  </body>
+</html>
 
     
-//     `)
+    `)
   });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
