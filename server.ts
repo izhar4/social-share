@@ -24,7 +24,7 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   nonSPArouter.get('/', (req, res) => {
-    console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+    console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', res)
     res.render(share);
   });
   server.use((req, res, next) => {
