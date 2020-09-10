@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 declare var FB;
 @Component({
   selector: 'app-root',
@@ -7,15 +8,17 @@ declare var FB;
 })
 export class AppComponent {
   title = 'social-share';
-
+  constructor(private readonly meta: Meta){}
   shareOverrideOGMeta(): void {
     const overrideTitle = `${Math.random() * 10} Title`;
     const overrideDescription = `${Math.random() * 10} Desc`;
     const overrideLink = 'https://social-share-angular.herokuapp.com/';
     const overrideImage = 'https://eventbox-prod.s3.amazonaws.com/profile/80245241589900869247.jpg';
+    console.log(overrideTitle, overrideDescription)
+    this.meta.updateTag({property: 'og:description', content: 'overriden'});
     FB.ui({
       method: 'share_open_graph',
-      action_type: 'og.likes',
+      action_type: 'og.shares',
       action_properties: JSON.stringify({
         object: {
           'og:url': window.location.href,
