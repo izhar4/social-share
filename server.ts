@@ -12,6 +12,7 @@ import { existsSync } from 'fs';
 export function app(): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/social-share/browser');
+  const share = join(process.cwd(), 'share.html');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   const nonSPArouter  = express.Router();
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
@@ -35,25 +36,15 @@ export function app(): express.Express {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 
-  // nonSPArouter.get('/', function(req,res) {
-  //   var
-  //     img   = 'placeholder.png';
-       
-  //   res.render('bot', { 
-  //     img       : img,
-  //     url       : 'https://bot-social-share.herokuapp.com/',
-  //     title     : 'Bot Test', 
-  //     descriptionText 
-  //               : 'This is designed to appeal to bots',
-  //     imageUrl  : 'https://bot-social-share.herokuapp.com/'+img
-  //   });
-  // });
+  nonSPArouter.get('/', (req,res)=> {
+    res.render(share);
+  });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
     if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
       console.log(ua, ' is a bot');
       console.log(req.query)
-      // nonSPArouter(req,res,next)
+      nonSPArouter(req,res,next)
     }
 
     next();
