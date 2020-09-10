@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'social-share';
   constructor(
     @Inject(DOCUMENT) private dom,
-    private readonly meta: Meta, private readonly router: Router, private route: ActivatedRoute) { }
+    private readonly metaService: Meta, private readonly router: Router, private route: ActivatedRoute) { }
   shareOverrideOGMeta(): void {
     const overrideTitle = `${Number(Math.random().toFixed(2)) * 100} Title`;
     const overrideDescription = `${Number(Math.random().toFixed(2)) * 100} Desc`;
@@ -29,6 +29,16 @@ export class AppComponent {
         },
         queryParamsHandling: 'merge', // remove to replace all query params by provided
       }).then(res => {
+        this.metaService.updateTag({ property: 'og:title', content: overrideTitle });
+        this.metaService.updateTag({ property: 'og:url', content: this.dom.URL });
+        this.metaService.updateTag({ property: 'og:image', content: overrideImage});
+        this.metaService.updateTag({ property: 'og:description', content: overrideDescription});
+        this.metaService.updateTag({ property: 'og:image:width', content: '1279'});
+        this.metaService.updateTag({ property: 'og:image:height', content: '853'});
+
+
+
+        // this.metaService.updateTag({ property: 'og:image:url', content: coverUrl, itemprop: 'image' });
         // const canURL = this.dom.URL;
         // const link: HTMLLinkElement = this.dom.createElement('link');
         // link.setAttribute('rel', 'canonical');
