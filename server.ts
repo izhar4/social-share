@@ -14,7 +14,7 @@ export function app(): express.Express {
   const distFolder = join(process.cwd(), 'dist/social-share/browser');
   const share = join(distFolder, 'assets/html/share.html');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
-  const nonSPArouter  = express.Router();
+  const nonSPArouter = express.Router();
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
@@ -36,7 +36,7 @@ export function app(): express.Express {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 
-  nonSPArouter.get('/', (req,res)=> {
+  nonSPArouter.get('/', (req, res) => {
     res.render(share);
   });
   server.use((req, res, next) => {
@@ -44,10 +44,11 @@ export function app(): express.Express {
     if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
       console.log(ua, ' is a bot');
       console.log(req.query)
-      nonSPArouter(req,res,next)
+      nonSPArouter(req, res, next)
+    } else {
+      next();
     }
 
-    next();
   });
 
   return server;
