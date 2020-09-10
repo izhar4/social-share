@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 declare var FB;
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ declare var FB;
 })
 export class AppComponent {
   title = 'social-share';
-  constructor(private readonly meta: Meta, private readonly router: Router, private route: ActivatedRoute) { }
+  constructor(
+    @Inject(DOCUMENT) private dom,
+    private readonly meta: Meta, private readonly router: Router, private route: ActivatedRoute) { }
   shareOverrideOGMeta(): void {
     const overrideTitle = `${Math.random() * 10} Title`;
     const overrideDescription = `${Math.random() * 10} Desc`;
@@ -26,12 +29,17 @@ export class AppComponent {
         },
         queryParamsHandling: 'merge', // remove to replace all query params by provided
       }).then(res => {
+        const canURL = this.dom.URL;
+        const link: HTMLLinkElement = this.dom.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        this.dom.head.appendChild(link);
+        link.setAttribute('href', canURL);
         FB.ui({
           method: 'share_open_graph',
           action_type: 'og.likes',
           action_properties: JSON.stringify({
             object: {
-              'og:url': window.location.href,
+              'og:url': this.dom.URL,
               'og:title': overrideTitle,
               'og:description': overrideDescription,
               'og:image': overrideImage,
