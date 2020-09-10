@@ -3,7 +3,7 @@ window.fbAsyncInit = function () {
         appId: '850496558621957',
         autoLogAppEvents: true,
         xfbml: true,
-        version: 'v2.12'
+        version: 'v3.3'
     });
     FB.AppEvents.logPageView();
 };

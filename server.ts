@@ -23,6 +23,22 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
+  nonSPArouter.get('/', (req, res) => {
+    console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.')
+    res.render(share);
+  });
+  server.use((req, res, next) => {
+    const ua = req.headers['user-agent'];
+    console.log('>>>>>>>>>>>>', ua)
+    if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
+      console.log(ua, ' is a bot');
+      console.log(req.query)
+      nonSPArouter(req, res, next)
+    } else {
+      next();
+    }
+
+  });
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
@@ -33,23 +49,15 @@ export function app(): express.Express {
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
     // console.log('getttt', req)
+    // const ua = req.headers['user-agent'];
+    // if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
+    //   console.log(ua, ' is a bot');
+    //   console.log(req.query);
+    // }
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 
-  nonSPArouter.get('/', (req, res) => {
-    res.render(share);
-  });
-  server.use((req, res, next) => {
-    const ua = req.headers['user-agent'];
-    if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
-      console.log(ua, ' is a bot');
-      console.log(req.query)
-      nonSPArouter(req, res, next)
-    } else {
-      next();
-    }
-
-  });
+  
 
   return server;
 }
