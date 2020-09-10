@@ -31,7 +31,17 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
+    console.log('getttt', req)
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+  });
+
+  server.use((req, res, next) => {
+    const ua = req.headers['user-agent'];
+    if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
+      console.log(ua, ' is a bot');
+    }
+
+    next();
   });
 
   return server;
