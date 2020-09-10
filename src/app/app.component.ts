@@ -15,10 +15,10 @@ export class AppComponent {
     const overrideLink = 'https://social-share-angular.herokuapp.com/';
     const overrideImage = 'https://eventbox-prod.s3.amazonaws.com/profile/80245241589900869247.jpg';
     console.log(overrideTitle, overrideDescription)
-    this.meta.updateTag({property: 'og:description', content: 'overriden'});
+    // this.meta.updateTag({property: 'og:description', content: 'overriden'});
     FB.ui({
       method: 'share_open_graph',
-      action_type: 'og.shares',
+      action_type: 'og.likes',
       action_properties: JSON.stringify({
         object: {
           'og:url': window.location.href,
