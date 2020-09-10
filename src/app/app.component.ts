@@ -51,11 +51,11 @@ export class AppComponent {
       action_properties: JSON.stringify({
         object: {
           'og:url': this.dom.URL,
-          'og:title': overrideTitle,
-          'og:description': overrideDescription,
-          'og:image': overrideImage,
-          'og:image:width': 1279,
-          'og:image:height': 853
+          // 'og:title': overrideTitle,
+          // 'og:description': overrideDescription,
+          // // 'og:image': overrideImage,
+          // 'og:image:width': 1279,
+          // 'og:image:height': 853
         }
       })
     },
