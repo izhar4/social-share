@@ -13,7 +13,7 @@ import * as fs from 'fs';
 export function app(): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/social-share/browser');
-  const share = join(distFolder, 'assets/html/share.html');
+  const share = join(distFolder, 'assets/html/share');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   const nonSPArouter = express.Router();
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
@@ -26,10 +26,10 @@ export function app(): express.Express {
 
   nonSPArouter.get('/', (req, res, next) => {
     console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', share)
-    fs.readFile(share, 'utf8', (err, text) => {
-      res.send(text);
-    });
-    // return res.render(share);
+    // fs.readFile(share, 'utf8', (err, text) => {
+    //   res.send(text);
+    // });
+    res.render(`${share}`, { data: 'hello' });
   });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
