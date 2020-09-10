@@ -33,7 +33,7 @@ export function app(): express.Express {
         <title>Share html Ref</title>
       <meta charset="utf-8">
       <meta property="og:locale" content="en_US" />
-      <meta property="og:url" content="https://social-share-angular.herokuapp.com/" />
+      <meta property="og:url" content="https://social-share-angular.herokuapp.com/?overrideTitle=4%20Title&overrideDescription=86%20Desc&overrideImage=https:%2F%2Feventbox-prod.s3.amazonaws.com%2Fprofile%2F49287791599163460440.jpg" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="${req.query.overrideTitle}" />
       <meta property="og:image" content="${req.query.overrideImage}" />
