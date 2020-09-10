@@ -25,11 +25,8 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   nonSPArouter.get('/', (req, res, next) => {
-    // console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', share)
-    // fs.readFile(share, 'utf8', (err, text) => {
-    //   res.send(text);
-    // });
-    // res.render('share');
+    console.log('queryyy', req.query, req.query.overrideTitle, req.query.overrideImage,
+      req.query.overrideDescription)
     res.send(`
     <!doctype html>
 <html lang="en">
@@ -52,8 +49,6 @@ export function app(): express.Express {
     Hello
   </body>
 </html>
-
-    
     `)
   });
   server.use((req, res, next) => {
@@ -62,7 +57,11 @@ export function app(): express.Express {
     if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
       console.log(ua, ' is a bot');
       console.log(req.query)
-      nonSPArouter(req, res, next)
+      if (req.query.overrideTitle && req.query.overrideDescription && req.query.overrideImage) {
+        nonSPArouter(req, res, next)
+      } else {
+        next()
+      }
     } else {
       next();
     }
@@ -90,9 +89,9 @@ function run(): void {
   const server = app();
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
-    fs.createReadStream(join(process.cwd(), 'dist/social-share/browser/assets/html/share.html')).pipe(fs.createWriteStream(
-      join(process.cwd(), 'dist/social-share/browser/share.html')
-    ));
+    // fs.createReadStream(join(process.cwd(), 'dist/social-share/browser/assets/html/share.html')).pipe(fs.createWriteStream(
+    //   join(process.cwd(), 'dist/social-share/browser/share.html')
+    // ));
   });
 }
 
