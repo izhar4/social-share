@@ -7,13 +7,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "start:heroku": "node dist/space/server/main.js",
+    "start:heroku": "node dist/social-share/server/main.js",
     "e2e": "ng e2e",
     "dev:ssr": "ng run social-share:serve-ssr",
     "serve:ssr": "node dist/social-share/server/main.js",
     "build:ssr": "ng build --prod && ng run social-share:server:production",
     "prerender": "ng run social-share:prerender",
-    "heroku-postbuild": "ng lint && ng build --prod && ng run space:server:production"
+    "heroku-postbuild": "ng build --prod && ng run social-share:server:production"
   },
   "private": true,
   "dependencies": {
