@@ -7,7 +7,8 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
-
+import * as fs from 'fs';
+// const fs = require('fs');
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
@@ -25,7 +26,10 @@ export function app(): express.Express {
 
   nonSPArouter.get('/', (req, res, next) => {
     console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', share)
-    return res.render(share);
+    fs.readFile(share, 'utf8', (err, text) => {
+      res.send(text);
+    });
+    // return res.render(share);
   });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
