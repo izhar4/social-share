@@ -29,7 +29,27 @@ export function app(): express.Express {
     // fs.readFile(share, 'utf8', (err, text) => {
     //   res.send(text);
     // });
-    res.render(`${share}`, { data: 'hello' });
+    // res.render(`${share}`, { data: 'hello' });
+    res.send(`
+    <!doctype html>
+<html lang="en">
+
+<head>
+    <title>Share html Ref</title>
+  <meta charset="utf-8">
+
+  <meta property="fb:app_id" content="850496558621957" />
+  <meta property="og:url" content="https://mixpanel.com/" />
+  <meta property="og:title" content="Hacker News Share" />
+  <meta property="og:description" content="Hacker News Desc Share" />
+</head>
+<body>
+    Hello
+  </body>
+</html>
+
+    
+    `)
   });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
