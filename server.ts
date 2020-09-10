@@ -42,11 +42,11 @@ export function app(): express.Express {
 
   <meta property="og:url" content="https://social-share-angular.herokuapp.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Hacker News share sjhare hsre" />
-  <meta property="og:image" content="https://eventbox-prod.s3.amazonaws.com/profile/80245241589900869247.jpg" />
+  <meta property="og:title" content="${req.query.overrideTitle}" />
+  <meta property="og:image" content="${req.query.overrideImage}" />
   <meta property="og:image:width" content="1279" />
   <meta property="og:image:height" content="853" />
-  <meta property="og:description" content="Hacker News Desc share desc ssjsjsjsjm" />
+  <meta property="og:description" content="${req.query.overrideDescription}" />
 </head>
 <body>
     Hello
