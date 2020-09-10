@@ -27,28 +27,26 @@ export function app(): express.Express {
   nonSPArouter.get('/', (req, res, next) => {
     console.log('queryyy', req.query, req.query.overrideTitle, req.query.overrideImage,
       req.query.overrideDescription)
+    const str = `<!doctype html>
+    <html lang="en">
+    <head>
+        <title>Share html Ref</title>
+      <meta charset="utf-8">
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:url" content="https://social-share-angular.herokuapp.com/" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="${req.query.overrideTitle}" />
+      <meta property="og:image" content="${req.query.overrideImage}" />
+      <meta property="og:image:width" content="1279" />
+      <meta property="og:image:height" content="853" />
+      <meta property="og:description" content="${req.query.overrideDescription}" />
+    </head>
+    <body>
+        Hello
+      </body>
+    </html>`;
     res.send(`
-    <!doctype html>
-<html lang="en">
-
-<head>
-    <title>Share html Ref</title>
-  <meta charset="utf-8">
-
-  <meta property="og:locale" content="en_US" />
-
-  <meta property="og:url" content="https://social-share-angular.herokuapp.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="${req.query.overrideTitle}" />
-  <meta property="og:image" content="${req.query.overrideImage}" />
-  <meta property="og:image:width" content="1279" />
-  <meta property="og:image:height" content="853" />
-  <meta property="og:description" content="${req.query.overrideDescription}" />
-</head>
-<body>
-    Hello
-  </body>
-</html>
+    ${str}
     `)
   });
   server.use((req, res, next) => {
