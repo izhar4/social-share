@@ -14,8 +14,8 @@ export class AppComponent {
     @Inject(DOCUMENT) private dom,
     private readonly meta: Meta, private readonly router: Router, private route: ActivatedRoute) { }
   shareOverrideOGMeta(): void {
-    const overrideTitle = `${Math.random() * 10} Title`;
-    const overrideDescription = `${Math.random() * 10} Desc`;
+    const overrideTitle = `${Number(Math.random().toFixed(2)) * 100} Title`;
+    const overrideDescription = `${Number(Math.random().toFixed(2)) * 100} Desc`;
     const overrideLink = 'https://social-share-angular.herokuapp.com/';
     const overrideImage = 'https://eventbox-prod.s3.amazonaws.com/profile/80245241589900869247.jpg';
     console.log(overrideTitle, overrideDescription)
@@ -29,11 +29,11 @@ export class AppComponent {
         },
         queryParamsHandling: 'merge', // remove to replace all query params by provided
       }).then(res => {
-        const canURL = this.dom.URL;
-        const link: HTMLLinkElement = this.dom.createElement('link');
-        link.setAttribute('rel', 'canonical');
-        this.dom.head.appendChild(link);
-        link.setAttribute('href', canURL);
+        // const canURL = this.dom.URL;
+        // const link: HTMLLinkElement = this.dom.createElement('link');
+        // link.setAttribute('rel', 'canonical');
+        // this.dom.head.appendChild(link);
+        // link.setAttribute('href', canURL);
         FB.ui({
           method: 'share_open_graph',
           action_type: 'og.likes',
