@@ -36,7 +36,7 @@ export function app(): express.Express {
       <meta property="og:url" content="https://social-share-angular.herokuapp.com/?overrideTitle=4%20Title&overrideDescription=86%20Desc&overrideImage=https:%2F%2Feventbox-prod.s3.amazonaws.com%2Fprofile%2F49287791599163460440.jpg" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="${req.query.overrideTitle}" />
-      <meta property="og:image" content="${req.query.overrideImage}" />
+      <meta property="og:image" content="https://eventbox-prod.s3.amazonaws.com/profile/${req.query.overrideImage}" />
       <meta property="og:image:width" content="1279" />
       <meta property="og:image:height" content="853" />
       <meta property="og:description" content="${req.query.overrideDescription}" />

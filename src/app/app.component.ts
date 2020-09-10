@@ -17,7 +17,7 @@ export class AppComponent {
     const overrideTitle = `${Number(Math.random().toFixed(2)) * 100} Title`;
     const overrideDescription = `${Number(Math.random().toFixed(2)) * 100} Desc`;
     const overrideLink = 'https://social-share-angular.herokuapp.com/';
-    const overrideImage = 'https://eventbox-prod.s3.amazonaws.com/profile/49287791599163460440.jpg';
+    // const overrideImage = 'https://eventbox-prod.s3.amazonaws.com/profile/49287791599163460440.jpg';
     console.log(overrideTitle, overrideDescription)
     this.router.navigate(
       [],
@@ -26,7 +26,7 @@ export class AppComponent {
         queryParams: {
           overrideTitle,
           overrideDescription,
-          overrideImage
+          overrideImage: 'profile/49287791599163460440.jpg'
         },
         queryParamsHandling: 'merge', // remove to replace all query params by provided
       }).then(res => {
