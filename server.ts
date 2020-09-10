@@ -23,9 +23,9 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  nonSPArouter.get('/', (req, res) => {
+  nonSPArouter.get('/', (req, res, next) => {
     console.log('share>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', res)
-    res.render(share);
+    res.send(share);
   });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
