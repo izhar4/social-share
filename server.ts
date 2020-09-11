@@ -25,13 +25,14 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   nonSPArouter.get('/', (req, res, next) => {
+    const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
     const str = `<!doctype html>
     <html lang="en">
     <head>
         <title>Share html Ref</title>
       <meta charset="utf-8">
       <meta property="og:locale" content="en_US" />
-      <meta property="og:url" content="https://social-share-angular.herokuapp.com/post/1" />
+      <meta property="og:url" content="${url}" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="${req.query.overrideTitle}" />
       <meta property="og:image" content="https://eventbox-prod.s3.amazonaws.com/profile/${req.query.overrideImage}" />
@@ -50,10 +51,11 @@ export function app(): express.Express {
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
     if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
+      console.log(req.query)
       if (req.query.overrideTitle && req.query.overrideDescription && req.query.overrideImage) {
         nonSPArouter(req, res, next);
       } else {
-        next();
+        next()
       }
     } else {
       next();
