@@ -10,6 +10,7 @@ declare var FB;
 })
 export class AppComponent {
   title = 'social-share';
+  tweetUrl;
   constructor(
     @Inject(DOCUMENT) private dom,
     private readonly metaService: Meta, private readonly router: Router, private route: ActivatedRoute) { }
@@ -47,5 +48,27 @@ export class AppComponent {
         // Action after response
       }, error => console.log(error));
     });
+  }
+
+  tweet(){
+    const baseUrl = 'https://twitter.com/intent/tweet';
+    const overrideTitle = `${Number(Math.random().toFixed(2)) * 100} Title`;
+    const overrideDescription = `${Number(Math.random().toFixed(2)) * 100} Desc`;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {
+          overrideTitle,
+          overrideDescription,
+          overrideImage: 'logo/9xFQUizaXWhZF6GsbO9bIGK7tGVXcHOfuZMPnOhf.png'
+        },
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+      }).then(res => {
+        this.tweetUrl = `${baseUrl}?${this.dom.URL}`;
+        this.dom.getElementById('tweet-btn').click();
+    });
+
+//  this.tweetUrl = `${this.tweetUrl}?`
   }
 }
