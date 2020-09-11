@@ -25,15 +25,13 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   nonSPArouter.get('/', (req, res, next) => {
-    console.log('queryyy', req.query, req.query.overrideTitle, req.query.overrideImage,
-      req.query.overrideDescription)
     const str = `<!doctype html>
     <html lang="en">
     <head>
         <title>Share html Ref</title>
       <meta charset="utf-8">
       <meta property="og:locale" content="en_US" />
-      <meta property="og:url" content="https://social-share-angular.herokuapp.com/?overrideTitle=4%20Title&overrideDescription=86%20Desc&overrideImage=https:%2F%2Feventbox-prod.s3.amazonaws.com%2Fprofile%2F49287791599163460440.jpg" />
+      <meta property="og:url" content="https://social-share-angular.herokuapp.com/post/1" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="${req.query.overrideTitle}" />
       <meta property="og:image" content="https://eventbox-prod.s3.amazonaws.com/profile/${req.query.overrideImage}" />
@@ -47,18 +45,15 @@ export function app(): express.Express {
     </html>`;
     res.send(`
     ${str}
-    `)
+    `);
   });
   server.use((req, res, next) => {
     const ua = req.headers['user-agent'];
-    console.log('>>>>>>>>>>>>', ua)
     if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(ua)) {
-      console.log(ua, ' is a bot');
-      console.log(req.query)
       if (req.query.overrideTitle && req.query.overrideDescription && req.query.overrideImage) {
-        nonSPArouter(req, res, next)
+        nonSPArouter(req, res, next);
       } else {
-        next()
+        next();
       }
     } else {
       next();
@@ -87,9 +82,6 @@ function run(): void {
   const server = app();
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
-    // fs.createReadStream(join(process.cwd(), 'dist/social-share/browser/assets/html/share.html')).pipe(fs.createWriteStream(
-    //   join(process.cwd(), 'dist/social-share/browser/share.html')
-    // ));
   });
 }
 
