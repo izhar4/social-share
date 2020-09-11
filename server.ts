@@ -35,7 +35,7 @@ export function app(): express.Express {
       <meta property="og:url" content="${url}" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="${req.query.overrideTitle}" />
-      <meta property="og:image" content="https://eventbox-prod.s3.amazonaws.com/profile/${req.query.overrideImage}" />
+      <meta property="og:image" content="https://hwml-dev-backend.s3.amazonaws.com/company/${req.query.overrideImage}" />
       <meta property="og:image:width" content="1279" />
       <meta property="og:image:height" content="853" />
       <meta property="og:description" content="${req.query.overrideDescription}" />
