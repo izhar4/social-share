@@ -24,7 +24,7 @@ export class AppComponent {
         queryParams: {
           overrideTitle,
           overrideDescription,
-          overrideImage: 'profile/18563531599697995601.jpg'
+          overrideImage: 'profile/83462871594883881051.jpeg'
         },
         queryParamsHandling: 'merge', // remove to replace all query params by provided
       }).then(res => {
