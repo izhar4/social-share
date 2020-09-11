@@ -25,7 +25,7 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   nonSPArouter.get('/', (req, res, next) => {
-    const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+    const url = `https://${req.get('host')}${req.originalUrl}`;
     const str = `<!doctype html>
     <html lang="en">
     <head>
