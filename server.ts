@@ -34,10 +34,10 @@ export function app(): express.Express {
       <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@izharmalik8" />
   <meta name="twitter:creator" content="@izharmalik8" />
-  <meta name="twitter:title" content="Parade of Fans for Houston’s Funeral">
+  <meta name="twitter:title" content="${req.query.overrideTitle}">
   <meta name="twitter:description"
-    content="NEWARK Description - The guest list and parade of limousines with celebrities emerging from them seemed more suited to a red carpet event in Hollywood or New York than than a gritty stretch of Sussex Avenue near the former site of the James M. Baxter Terrace public housing project here.">
-  <meta name="twitter:image" content="https://eventbox-prod.s3.amazonaws.com/profile/80245241589900869247.jpg">
+    content="${req.query.overrideDescription}">
+  <meta name="twitter:image" content="https://hwml-dev-backend.s3.amazonaws.com/company/${req.query.overrideImage}">
 
       <meta property="og:locale" content="en_US" />
       <meta property="og:url" content="${url}" />
