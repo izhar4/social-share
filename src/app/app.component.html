@@ -1,16 +1,33 @@
+<!--Sharing dynamic content facebook-->
+<button (click)="shareOverrideOGMeta()">Facebook Dyanmic Share</button>
 
-<button (click)="shareOverrideOGMeta()">Share</button>
-<div id="fb-root"></div>
-  <div class="fb-share-button" data-href="https://social-share-angular.herokuapp.com/"
-                data-layout="button_count"></div>
+<!-- Sharing static content facebook -->
+<div class="btn-div">
+  <div id="fb-root"></div>
+  <div class="fb-share-button" data-href="https://social-share-angular.herokuapp.com/" data-layout="button_count">
+  </div>
+</div>
 
+<!--Share for twitter-->
+<div class="btn-div">
+  <button>
+    <a class="twitter-share-button" id="twitter-share1" target="__blank" [href]="hrefUrl">
+      Tweet</a>
+  </button>
+</div>
 
-                <!-- <a class="twitter-share-button" target="__blank"
-  href="https://twitter.com/intent/tweet?text=Hello%20world%20https://social-share-angular.herokuapp.com/">
-Tweet</a> -->
-<button (click)="tweet()" >Tweet</button>
-<button  id="new-button"></button>
-<!-- <a style="display: none;" id="tweet-btn" class="twitter-share-button" target="__blank"
-  [href]="tweetUrl">
-Tweet</a> -->
+<!--Generate new url for twitter share dynamically-->
+<!-- <div class="btn-div">
+  <button (click)="generate()">Generate New Url For Tweet</button>
+</div> -->
+
+<!--Generate new tweet button on click twitter api-->
+<div class="btn-div">
+  <button (click)="createTwitterBtn()">
+    Create twitter button</button>
+  <div>
+    <h3>New Generated tweet button</h3>
+    <div id="new-button-div"></div>
+  </div>
+</div>
 <router-outlet></router-outlet>
