@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 declare var FB;
@@ -12,7 +11,7 @@ declare var twttr;
 export class AppComponent {
   twitterBtnCount = 0;
   twitterBaseUrl = `https://twitter.com/intent/tweet?`;
-  hrefUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent('https://social-share-angular.herokuapp.com?overrideTitle=test&overrideDescription=testdesc&overrideImage=logo/9xFQUizaXWhZF6GsbO9bIGK7tGVXcHOfuZMPnOhf.png')}`;
+  hrefUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent('https://social-share-angular.herokuapp.com?overrideTitle=customTitle&overrideDescription=customdesc&overrideImage=logo/9xFQUizaXWhZF6GsbO9bIGK7tGVXcHOfuZMPnOhf.png')}`;
   title = 'social-share';
   tweetUrl = 'https://twitter.com/intent/tweet?text=Hello';
   constructor(
